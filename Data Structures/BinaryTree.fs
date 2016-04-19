@@ -1,13 +1,13 @@
 ﻿module BinaryTree
 
-type Tree<'a when 'a:comparison> = 
-    | TreeElement of 'a
-    | BinaryTree of Tree<'a> * 'a * Tree<'a>
+type BinaryTree<'a when 'a:comparison> = 
+    | Element of 'a
+    | Tree of BinaryTree<'a> * 'a * BinaryTree<'a>
 
-let rec treeMember (element :'a) (tree :Tree<'a>) =
+let rec isMember (element :'a) (tree :BinaryTree<'a>) =
     match tree with 
-    | TreeElement a -> a = element
-    | BinaryTree (left, top, right) -> 
-        if top < element then treeMember element right
-        else if top > element then treeMember element left
+    | Element a -> a = element
+    | Tree (left, top, right) -> 
+        if top < element then isMember element right
+        else if top > element then isMember element left
         else true
