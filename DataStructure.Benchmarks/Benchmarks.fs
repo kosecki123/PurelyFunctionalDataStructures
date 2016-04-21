@@ -9,9 +9,9 @@ type Bench() =
     let simpleTree = Tree (createNode(5) , 6, createNode(7))
 
     let tree = 
-        let root = new TreeNode<int>(6)
-        root.Left <- new TreeNode<int>(5)
-        root.Right <- new TreeNode<int>(7)
+        let root = new BinaryTree<int>(6)
+        root.Left <- new BinaryTree<int>(5)
+        root.Right <- new BinaryTree<int>(7)
 
         root
 
