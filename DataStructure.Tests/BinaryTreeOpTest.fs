@@ -1,6 +1,6 @@
-﻿module BinaryTreeTest
+﻿module BinaryTreeOpTest
 
-open BinaryTree
+open BinaryTreeOp
 open NUnit.Framework
 open Swensen.Unquote
 
@@ -11,7 +11,7 @@ let simpleTree = Tree (createNode(5) , 6, createNode(7))
 let ``isMember given element 4 and singleNode 4 returns true`` () =
     let tree = (createNode 4)
 
-    BinaryTree.isMember 4  tree =! true
+    isMember 4  tree =! true
 
 [<Test>]
 let ``isMember given element 8 and simpleTree (does not contain 8) returns false`` () =

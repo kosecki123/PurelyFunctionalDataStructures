@@ -1,12 +1,14 @@
 ﻿module Benchmarks
 
-open BinaryTree
 open BenchmarkDotNet.Attributes
 open DataStructure.CSharp
 
 type Bench() =
-    let createNode value = Tree (Empty, value, Empty)
-    let simpleTree = Tree (createNode(5) , 6, createNode(7))
+    let createNode value = BinaryTree.Tree (BinaryTree.Empty, value, BinaryTree.Empty)
+    let simpleTree = BinaryTree.Tree (createNode(5) , 6, createNode(7))
+    
+    let createNodeOp value = BinaryTreeOp.Tree (BinaryTreeOp.Empty, value, BinaryTreeOp.Empty)
+    let simpleTreeOp = BinaryTreeOp.Tree (createNodeOp(5) , 6, createNodeOp(7))
 
     let tree = 
         let root = new BinaryTree<int>(6)
@@ -16,12 +18,20 @@ type Bench() =
         root
 
     [<Benchmark>]
+    member this.MkPerfectTree () =
+        BinaryTree.mkPerfectTree 5 |> ignore
+
+    [<Benchmark>]
+    member this.MkPerfectTreeOp () =
+        BinaryTreeOp.mkPerfectTree 5 |> ignore
+
+    [<Benchmark>]
     member this.FSharpRecursiveIsMember () =
         BinaryTree.isMember 5 simpleTree |> ignore
 
     [<Benchmark>]
     member this.FSharpRecursiveIsMember2 () =
-        BinaryTree.isMember2 5 simpleTree |> ignore
+        BinaryTreeOp.isMember 5 simpleTreeOp |> ignore
 
     [<Benchmark>]
     member this.CSharpNonRecursiveIsMember () =
