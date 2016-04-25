@@ -1,5 +1,7 @@
 ﻿module BinaryTree
 
+open Arithmetic
+
 type BinaryTree<'a when 'a : comparison> = 
     | Empty
     | Tree of BinaryTree<'a> * 'a * BinaryTree<'a>
@@ -23,6 +25,6 @@ let rec insert (element : 'a) (tree : BinaryTree<'a>) =
         else tree
 
 let mkPerfectTree depth = 
-    let n = (2 <<< depth) - 1
-    let root = (n - 1) / 2
+    let n = (2 <<< depth) |> dec
+    let root = n |> dec |> div 2
     [ 1..n ] |> List.fold (fun acc i -> insert i acc) (Tree(Empty, root, Empty))

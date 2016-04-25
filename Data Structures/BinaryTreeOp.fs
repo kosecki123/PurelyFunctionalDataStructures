@@ -1,5 +1,7 @@
 ﻿module BinaryTreeOp
 
+open Arithmetic
+
 type BinaryTree<'a when 'a : comparison> = 
     | Empty
     | Tree of BinaryTree<'a> * 'a * BinaryTree<'a>
@@ -27,18 +29,20 @@ let rec insert (element : 'a) (tree : BinaryTree<'a>) =
         else tree
 
 let mkPerfectTree depth = 
-    let n = (2 <<< depth) - 1
+    let n = (2 <<< depth) |> dec
     
     let split (coll : 'a list) = 
-        let index = (coll.Length - 1) / 2
-        List.splitAt index coll
+        let index = coll |> List.length |> dec |> div 2
+
+        coll
+        |> List.splitAt index
         |> function (l,(t::r)) -> (l, t, r)
     
     let rec tree (left, top, right : 'a list) = 
         let buildTree = 
             match (left, top, right) with
             | ([ _ ], _, [ _ ]) -> fun v -> Tree(Empty, v |> List.head, Empty)
-            | _ -> split >> tree
+            | _                 -> split >> tree
         Tree(left |> buildTree, top, right |> buildTree)
     
     [ 1..n ]

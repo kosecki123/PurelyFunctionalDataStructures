@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="Arithmetic.fs" />
     <Compile Include="BinaryTreeOp.fs" />
     <Compile Include="BinaryTree.fs" />
   </ItemGroup>
