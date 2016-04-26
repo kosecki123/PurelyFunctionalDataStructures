@@ -32,7 +32,7 @@ let mkPerfectTree depth =
     let n = (2 <<< depth) |> dec
     
     let split (coll : 'a list) = 
-        let index = coll |> List.length |> dec |> div 2
+        let index = coll |> List.length |> dec |> fun n -> div n 2
 
         coll
         |> List.splitAt index
